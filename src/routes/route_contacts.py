@@ -41,7 +41,7 @@ async def read_contacts(limit: int = 100, offset: int = 0,
 
 
 @router.get("/contacts/all/",
-            dependencies=[Depends(RoleAccess([RoleEnum.admin.value,RoleEnum.moderator.value]))],
+            dependencies=[Depends(RoleAccess([RoleEnum.admin.value, RoleEnum.moderator.value]))],
             response_model=List[ContactsResponse],
             tags=["admin"])
 async def read_contacts(limit: int = 100, offset: int = 0,
@@ -55,6 +55,7 @@ async def read_contacts(limit: int = 100, offset: int = 0,
                                                  last_name=last_name,
                                                  email=email)
     return contacts
+
 
 @router.get("/contacts/{contact_id}", response_model=ContactsResponse)
 async def read_contact(contact_id: int, contact_db: ContactDB = Depends(database.get_contact_db),
